@@ -1,0 +1,20 @@
+org: aaronrojas
+service: api-vision-artificial
+
+provider:
+  name: aws
+  runtime: python3.13
+  memorySize: 1024
+  timeout: 20
+  iam:
+    role: arn:aws:iam::429960844715:role/LabRole
+
+functions:
+  listar:
+    handler: DetectarEtiquetas.lambda_handler
+    events:
+      - http:
+          path: /images/etiquetas
+          method: post
+          cors: true
+          integration: lambda
